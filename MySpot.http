@@ -1,0 +1,19 @@
+@url = Reservations
+@url2 = http://localhost:5239/WeatherForecast
+
+###
+GET http://localhost:5239/{{url}}
+###
+GET {{url2}}
+
+###
+POST http://localhost:5239/{{url}}
+Content-Type: application/json
+
+{
+    "EmployeeName": "Name",
+    "ParkingSpotName": "PName",
+    "LicensePlate": "LicensePlate",
+    "Date": "2023-05-20"
+
+}
