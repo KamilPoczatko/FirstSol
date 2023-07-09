@@ -35,11 +35,17 @@ namespace MySpot.Api.Enitites
                 x.Date.Date == reservation.Date.Date);
             if (reservationAlreadyExists)
             {
-                throw new ParkingSpotAlreadyReservatedException(reservation.ParkingSpotName, reservation.Date);
+                throw new ParkingSpotAlreadyReservatedException(reservation.ParkingSpotId.ToString(), reservation.Date);
 
             }
 
             _reservations.Add(reservation);
+        }
+        public void RemoveReservation(Guid Id)
+        {
+            var existingReservation = Reservations.SingleOrDefault(x => x.Id == Id);
+
+            _reservations.Remove(existingReservation);
         }
 
     }

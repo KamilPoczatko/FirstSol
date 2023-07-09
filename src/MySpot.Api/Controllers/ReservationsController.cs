@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using MySpot.Api.Commands;
 using MySpot.Api.Enitites;
 using MySpot.Api.Services;
 
@@ -30,9 +31,9 @@ public class ReservationsController: ControllerBase
 
 
     [HttpPost]
-    public ActionResult Post([FromBody]Reservation reservation)
+    public ActionResult Post([FromBody]CreateReservation command)
     {
-        int? IdCreated = _service.Create(reservation);
+        var IdCreated = _service.Create(command with { ReservationId = Guid.NewGuid() });
 
         if (IdCreated is null)
         {
@@ -42,9 +43,9 @@ public class ReservationsController: ControllerBase
     }
 
     [HttpPut("{id:guid}")]
-    public ActionResult Put(Guid id, Reservation reservation)
+    public ActionResult Put(Guid id, ChangeReservationLicensePlate command)
     {
-        if (!_service.Update(id, reservation))
+        if (!_service.Update(command with { ReservationId = id}))
         {
             return NotFound();
         }
@@ -55,7 +56,7 @@ public class ReservationsController: ControllerBase
     [HttpDelete("{id:guid}")]
     public ActionResult Delete(Guid id)
     {
-        if (!_service.Delete(id))
+        if (!_service.Delete(new DeleteReservation(id)))
         {
             return NotFound();
         }
