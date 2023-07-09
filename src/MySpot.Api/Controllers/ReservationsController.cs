@@ -12,7 +12,7 @@ public class ReservationsController: ControllerBase
     private readonly ReservationsService _service = new();
    
 
-    [HttpGet("get")]
+    [HttpGet]
     public ActionResult<IEnumerable<Reservation>> Get() => Ok(_service.GetAllWeekly());
 
     [HttpGet("{id:guid}")]

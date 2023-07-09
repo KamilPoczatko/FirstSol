@@ -98,7 +98,6 @@ namespace MySpot.Api.Services
 
         private WeeklyParkingSpot GetWeeklyParkingSpotByReservation(Guid reservationId)
             => WeeklyParkingSpots.SingleOrDefault(x =>
-            x.Reservations.Any(r => r.Id == reservationId));// && 
-           // x.Reservations.SingleOrDefault(r =>r.Id == reservationId));
+            x.Reservations.Any(r => r.Id == reservationId));
     }
 }
