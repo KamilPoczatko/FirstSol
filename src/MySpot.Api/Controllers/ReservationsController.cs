@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using MySpot.Api.Models;
+using MySpot.Api.Enitites;
 using MySpot.Api.Services;
 
 namespace MySpot.Api.AddControllers;

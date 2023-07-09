@@ -1,5 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using MySpot.Api.Models;
+using MySpot.Api.Enitites;
 
 namespace MySpot.Api.Services
 {
@@ -23,6 +23,14 @@ namespace MySpot.Api.Services
 
         public int? Create(Reservation reservation)
         {
+            var now = DateTime.UtcNow.Date;
+            var pastDays = now.DayOfWeek is DayOfWeek.Sunday ? 7 : (int)now.DayOfWeek;
+            var remainingDays = 7 - pastDays;
+
+            if(!(reservation.Date.Date >= now && reservation.Date.Date <= now.AddDays(remainingDays))) 
+            {
+                return default;
+            }
 
             if (_parkingSpotNames.All(x => x != reservation.ParkingSpotName))
             {
@@ -50,6 +58,10 @@ namespace MySpot.Api.Services
             var existingReservation = reservations.SingleOrDefault(x => x.Id == id);
 
             if (existingReservation is null)
+            {
+                return false;
+            }
+            if (existingReservation.Date.Date <= DateTime.UtcNow)
             {
                 return false;
             }
