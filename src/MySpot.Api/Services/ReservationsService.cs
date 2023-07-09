@@ -2,20 +2,21 @@
 using MySpot.Api.Commands;
 using MySpot.Api.DTO;
 using MySpot.Api.Enitites;
+using MySpot.Api.ValueObjects;
 
 namespace MySpot.Api.Services
 {
     public class ReservationsService
     {
+        private static readonly Clock Clock = new Clock();
 
-
-        static private readonly List<WeeklyParkingSpot> WeeklyParkingSpots = new()
+        private static readonly List<WeeklyParkingSpot> WeeklyParkingSpots = new()
         {
-            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000001") , DateTime.UtcNow.Date, DateTime.UtcNow.Date.AddDays(7), "P1"),
-            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000002") , DateTime.UtcNow.Date, DateTime.UtcNow.Date.AddDays(7), "P2"),
-            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000003") , DateTime.UtcNow.Date, DateTime.UtcNow.Date.AddDays(7), "P3"),
-            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000004") , DateTime.UtcNow.Date, DateTime.UtcNow.Date.AddDays(7), "P4"),
-            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000005") , DateTime.UtcNow.Date, DateTime.UtcNow.Date.AddDays(7), "P5")
+            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000001") , new Week(Clock.Current()), "P1"),
+            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000002") , new Week(Clock.Current()), "P2"),
+            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000003") , new Week(Clock.Current()), "P3"),
+            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000004") , new Week(Clock.Current()), "P4"),
+            new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000005") , new Week(Clock.Current()), "P5")
         };
 
 
@@ -29,7 +30,7 @@ namespace MySpot.Api.Services
         public IEnumerable<ReservationDto> GetAllWeekly()
             => WeeklyParkingSpots.SelectMany(x => x.Reservations)
             .Select(x => new ReservationDto()
-            { 
+            {
                 Id = x.Id,
                 ParkingSpotId = x.ParkingSpotId,
                 EmployeeName = x.EmployeeName,
@@ -47,7 +48,7 @@ namespace MySpot.Api.Services
 
             var reservation = new Reservation(command.ReservationId, command.ParkingSpotId, command.EmployeeName, command.LicensePlate, command.Date);
             
-            weeklyParkingSpot.AddReservation(reservation);
+            weeklyParkingSpot.AddReservation(reservation, Clock.Current());
 
             return reservation.Id;
         }
@@ -67,7 +68,7 @@ namespace MySpot.Api.Services
                 return false;
             }
 
-            if (existingReservation.Date.Date <= DateTime.UtcNow)
+            if (existingReservation.Date.Value.Date <= Clock.Current())
             {
                 return false;
             }

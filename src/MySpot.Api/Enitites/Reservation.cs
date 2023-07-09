@@ -1,16 +1,17 @@
 using MySpot.Api.Exceptions;
+using MySpot.Api.ValueObjects;
 
 namespace MySpot.Api.Enitites;
 
 public class Reservation
 {
-    public Guid Id { get; }
-    public Guid ParkingSpotId { get; private set; }
-    public string EmployeeName { get; private set; }
-    public string LicensePlate { get; private set; }
-    public DateTime Date { get; private set; }
+    public ReservationId Id { get; }
+    public ParkingSpotId ParkingSpotId { get; private set; }
+    public EmployeeName EmployeeName { get; private set; }
+    public LicensePlate LicensePlate { get; private set; }
+    public Date Date { get; private set; }
 
-    public Reservation(Guid id, Guid parkingSpotName, string employeeName, string licensePlate, DateTime date)
+    public Reservation(ReservationId id, ParkingSpotId parkingSpotName, EmployeeName employeeName, LicensePlate licensePlate, Date date)
     {
         Id = id;
         ParkingSpotId = parkingSpotName;
@@ -19,14 +20,7 @@ public class Reservation
         Date = date;
     }
 
-    public void ChangeLicensePlate(string licensePlate)
-    {
-        if(string.IsNullOrWhiteSpace(licensePlate))
-        {
-            throw new EmptyLicensePlateException();
-        }
-
-        LicensePlate = licensePlate;
-    }
+    public void ChangeLicensePlate(LicensePlate licensePlate)
+        => LicensePlate = licensePlate;
 
 }
