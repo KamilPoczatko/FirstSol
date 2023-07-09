@@ -1,19 +1,39 @@
-@url = Reservations
-@url2 = http://localhost:5239/WeatherForecast
+@url = https://localhost:7007
+@reservationId= 55f39e93-a7e2-4a2f-9be4-8d9f35d7ee46
+
+@parkingSpotId = 00000000-0000-0000-0000-000000000001
 
 ###
-GET http://localhost:5239/{{url}}
+GET {{url}}/reservations/get
 ###
-GET {{url2}}
+GET {{url}}/reservations/{{reservationId}}
 
 ###
-POST http://localhost:5239/{{url}}
+POST {{url}}/reservations
 Content-Type: application/json
 
 {
+    "ParkingSpotId": "{{parkingSpotId}}",
     "EmployeeName": "Name",
-    "ParkingSpotName": "PName",
     "LicensePlate": "LicensePlate",
-    "Date": "2023-05-20"
+    "Date": "2023-07-09"
 
 }
+
+###
+PUT {{url}}/reservations/{{reservationId}}
+Content-Type: application/json
+
+{
+    "LicensePlate": "LicensePlate2"
+}
+
+###
+DELETE  {{url}}/reservations/{{reservationId}}
+Content-Type: application/json
+
+{
+    "LicensePlate": "LicensePlate2"
+}
+
+
