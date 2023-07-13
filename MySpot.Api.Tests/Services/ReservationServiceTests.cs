@@ -9,29 +9,24 @@ using MySpot.Api.Commands;
 using Shouldly;
 using MySpot.Api.ValueObjects;
 using MySpot.Api.Enitites;
+using MySpot.Api.Tests.Shared;
+using MySpot.Api.Repositories;
 
 namespace MySpot.Api.Tests.Services
 {
     public class ReservationServiceTests
     {
         #region Arrange
-        private static readonly Clock _clock = new Clock();
+        private readonly IClock _clock = new TestClock();
 
-        private readonly ReservationsService _reservationService;
-
-        private readonly List<WeeklyParkingSpot> _weeklyParkingSpots;
+        private readonly IReservationsService _reservationService;
+        
+        private readonly IWeeklyParkingSpotRepository _weeklyParkingSpotRepository;
 
         public ReservationServiceTests()
         {
-            _weeklyParkingSpots = new()
-            {
-                new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000001") , new Week(_clock.Current()), "P1"),
-                new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000002") , new Week(_clock.Current()), "P2"),
-                new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000003") , new Week(_clock.Current()), "P3"),
-                new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000004") , new Week(_clock.Current()), "P4"),
-                new WeeklyParkingSpot(Guid.Parse("00000000-0000-0000-0000-000000000005") , new Week(_clock.Current()), "P5")
-            };
-            _reservationService = new ReservationsService(_weeklyParkingSpots);
+            _weeklyParkingSpotRepository = new InMemoryWeeklyParkingSpotRepository(_clock); 
+            _reservationService = new ReservationsService(_clock, _weeklyParkingSpotRepository);
         }
         #endregion
 
@@ -39,8 +34,8 @@ namespace MySpot.Api.Tests.Services
         public void given_rservation_for_not_taken_date_create_reservation_should_succeed()
         {
             //Arrange
-            var parkingSpot = _weeklyParkingSpots.First(); 
-            var command = new CreateReservation(parkingSpot.Id, Guid.NewGuid(), DateTime.UtcNow.AddMinutes(5), "John Doe", "RMI 123");
+            var parkingSpot = _weeklyParkingSpotRepository.GetAll().First(); 
+            var command = new CreateReservation(parkingSpot.Id, Guid.NewGuid(), _clock.Current(), "John Doe", "RMI 123");
 
             //ACT
 
