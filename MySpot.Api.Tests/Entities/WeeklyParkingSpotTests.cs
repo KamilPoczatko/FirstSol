@@ -77,6 +77,7 @@ namespace MySpot.Api.Tests.Entities
             //ACT
             _weeklyParkingSpot.AddReservation(rservation, _now);
 
+            //Assert
             _weeklyParkingSpot.Reservations.ShouldHaveSingleItem();
 
         }
