@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using MySpot.Api.Enitites;
-using MySpot.Api.ValueObjects;
-using MySpot.Api.Exceptions;
+using MySpot.Core.Enitites;
+using MySpot.Core.ValueObjects;
+using MySpot.Core.Exceptions;
 using Shouldly;
 
 namespace MySpot.Api.Tests.Entities

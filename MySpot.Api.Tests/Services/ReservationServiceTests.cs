@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xunit;
-using MySpot.Api.Services;
-using MySpot.Api.Commands;
+using MySpot.Application.Services;
+using MySpot.Application.Commands;
 using Shouldly;
-using MySpot.Api.ValueObjects;
-using MySpot.Api.Enitites;
+using MySpot.Core.ValueObjects;
+using MySpot.Core.Enitites;
 using MySpot.Api.Tests.Shared;
-using MySpot.Api.Repositories;
+using MySpot.Infractructure.Repositories;
+using MySpot.Core.Repositories;
 
 namespace MySpot.Api.Tests.Services
 {

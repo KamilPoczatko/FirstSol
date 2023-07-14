@@ -1,15 +1,20 @@
-using MySpot.Api.Enitites;
-using MySpot.Api.Repositories;
-using MySpot.Api.Services;
-using MySpot.Api.ValueObjects;
+using MySpot.Core.Enitites;
+using MySpot.Infractructure.Repositories;
+using MySpot.Core.Repositories;
+using MySpot.Application.Services;
+using MySpot.Core.ValueObjects;
+using MySpot.Infractructure;
+using MySpot.Core;
+using MySpot.Application;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
 builder.Services.AddSingleton<IClock, Clock>()
-    .AddSingleton<IWeeklyParkingSpotRepository, InMemoryWeeklyParkingSpotRepository>()
-    .AddSingleton<IReservationsService, ReservationsService>();
+    .AddInfrastructure()
+    .AddCore()
+    .AddApplication();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

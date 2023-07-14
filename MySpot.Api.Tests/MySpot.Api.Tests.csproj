@@ -24,6 +24,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MySpot.Application\MySpot.Application.csproj" />
+    <ProjectReference Include="..\MySpot.Core\MySpot.Core.csproj" />
+    <ProjectReference Include="..\MySpot.Infractructure\MySpot.Infractructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Reference Include="MySpot.Api">
       <HintPath>..\src\MySpot.Api\bin\Debug\net7.0\MySpot.Api.dll</HintPath>
     </Reference>

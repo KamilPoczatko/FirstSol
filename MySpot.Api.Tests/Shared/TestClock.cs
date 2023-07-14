@@ -1,4 +1,4 @@
-﻿using MySpot.Api.Services;
+﻿using MySpot.Application.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
