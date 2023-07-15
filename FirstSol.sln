@@ -11,11 +11,16 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{337FBE9F
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Api.Tests", "MySpot.Api.Tests\MySpot.Api.Tests.csproj", "{249442EA-C88D-4A69-80CA-270207CB823F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Core", "MySpot.Core\MySpot.Core.csproj", "{A9E193DB-9021-428A-BCFE-F8057B0A6BC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Core", "MySpot.Core\MySpot.Core.csproj", "{A9E193DB-9021-428A-BCFE-F8057B0A6BC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Application", "MySpot.Application\MySpot.Application.csproj", "{0627EC25-4F9C-42DF-BEA2-87EDA343AA0D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Application", "MySpot.Application\MySpot.Application.csproj", "{0627EC25-4F9C-42DF-BEA2-87EDA343AA0D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MySpot.Infractructure", "MySpot.Infractructure\MySpot.Infractructure.csproj", "{7E4BB6BF-A133-471C-A276-258AF69A4A2E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MySpot.Infractructure", "MySpot.Infractructure\MySpot.Infractructure.csproj", "{7E4BB6BF-A133-471C-A276-258AF69A4A2E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{01A3476D-4F78-457E-B20A-E95330D8B662}"
+	ProjectSection(SolutionItems) = preProject
+		docker-compose.yml = docker-compose.yml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

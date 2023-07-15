@@ -4,7 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Extensions.DependencyInjection;
-using MySpot.Infractructure.Repositories;
+using MySpot.Core.Repositories;
+using MySpot.Infractructure.DAL;
+using MySpot.Infractructure.DAL.Repositories;
 
 namespace MySpot.Infractructure
 {
@@ -12,7 +14,8 @@ namespace MySpot.Infractructure
     {
         public static IServiceCollection AddInfrastructure(this IServiceCollection services)
         {
-            services.AddSingleton<InMemoryWeeklyParkingSpotRepository, InMemoryWeeklyParkingSpotRepository>();
+            services
+                .AddPostgres();
             return services;
         }
     }

@@ -10,8 +10,8 @@ using Shouldly;
 using MySpot.Core.ValueObjects;
 using MySpot.Core.Enitites;
 using MySpot.Api.Tests.Shared;
-using MySpot.Infractructure.Repositories;
 using MySpot.Core.Repositories;
+using MySpot.Infractructure.DAL.Repositories;
 
 namespace MySpot.Api.Tests.Services
 {

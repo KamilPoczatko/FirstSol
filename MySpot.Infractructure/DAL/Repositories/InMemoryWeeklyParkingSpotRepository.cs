@@ -3,13 +3,13 @@ using MySpot.Application.Services;
 using MySpot.Core.Repositories;
 using MySpot.Core.ValueObjects;
 
-namespace MySpot.Infractructure.Repositories
+namespace MySpot.Infractructure.DAL.Repositories
 {
     public class InMemoryWeeklyParkingSpotRepository : IWeeklyParkingSpotRepository
     {
         private readonly IClock _clock;
         private List<WeeklyParkingSpot> _weeklyParkingSpots;
-   
+
 
         public InMemoryWeeklyParkingSpotRepository(IClock clock)
         {
@@ -36,7 +36,7 @@ namespace MySpot.Infractructure.Repositories
         }
 
         public void Delete(WeeklyParkingSpot parkingSpot)
-        => _weeklyParkingSpots.Remove(parkingSpot);  
+        => _weeklyParkingSpots.Remove(parkingSpot);
 
         public void Update(WeeklyParkingSpot parkingSpot)
         {
