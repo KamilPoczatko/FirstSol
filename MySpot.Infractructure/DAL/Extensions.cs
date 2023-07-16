@@ -16,20 +16,29 @@ namespace MySpot.Infractructure.DAL
 {
     internal static class Extensions
     {
+        private const string SectionName = "DataBase";
+
         public static IServiceCollection AddPostgres(this IServiceCollection services, IConfiguration configuration)
         {
-            //const string connectionString = "Host=localhost;Database=MySpot;Username=postgres;Password=";
-            var section = configuration.GetSection("DataBase");
+            var section = configuration.GetSection(SectionName);
             services.Configure<DataBaseOptions>(section);
 
-            var options = new DataBaseOptions();
-            section.Bind(options);
+            var options = GetOptions<DataBaseOptions>(configuration, SectionName);
 
             services.AddDbContext<MySpotDbContext>(x => x.UseNpgsql(options.ConnectionString));
             services.AddScoped<IWeeklyParkingSpotRepository, PostgresWeeklyParkingSpotRepository>();
             AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior",true);
             services.AddHostedService<DatabaseInitializer>();
             return services;
+        }
+
+        public static T GetOptions<T>(this IConfiguration configuration, string sectionName) where T : class, new()
+        {
+            var options = new T();
+            var section = configuration.GetSection(sectionName);
+                        
+            section.Bind(options);
+            return options;
         }
     }
 }
