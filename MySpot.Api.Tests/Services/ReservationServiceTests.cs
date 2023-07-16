@@ -32,15 +32,16 @@ namespace MySpot.Api.Tests.Services
         #endregion
 
         [Fact]
-        public void given_rservation_for_not_taken_date_create_reservation_should_succeed()
+        public async void given_rservation_for_not_taken_date_create_reservation_should_succeed()
         {
             //Arrange
-            var parkingSpot = _weeklyParkingSpotRepository.GetAll().First(); 
+            var parkingSpots = await _weeklyParkingSpotRepository.GetAllAsync();
+            var parkingSpot = parkingSpots.First(); 
             var command = new CreateReservation(parkingSpot.Id, Guid.NewGuid(), _clock.Current(), "John Doe", "RMI 123");
 
             //ACT
 
-            var reservationId = (ReservationId)_reservationService.Create(command);
+            var reservationId = (ReservationId)await _reservationService.CreateAsync(command);
 
             //Assert
             reservationId.ShouldNotBeNull();

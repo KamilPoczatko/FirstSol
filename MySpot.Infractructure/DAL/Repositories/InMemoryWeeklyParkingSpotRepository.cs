@@ -24,22 +24,26 @@ namespace MySpot.Infractructure.DAL.Repositories
             };
         }
 
-        public IEnumerable<WeeklyParkingSpot> GetAll()
-    => _weeklyParkingSpots;
+        public Task<IEnumerable<WeeklyParkingSpot>> GetAllAsync()
+    => Task.FromResult<IEnumerable<WeeklyParkingSpot>>(_weeklyParkingSpots);
 
-        public WeeklyParkingSpot Get(ParkingSpotId id)
-            => _weeklyParkingSpots.SingleOrDefault(sp => sp.Id == id);
+        public Task<WeeklyParkingSpot> GetAsync(ParkingSpotId id)
+            => Task.FromResult<WeeklyParkingSpot>(_weeklyParkingSpots.SingleOrDefault(sp => sp.Id == id));
 
-        public void Add(WeeklyParkingSpot parkingSpot)
+        public Task AddAsync(WeeklyParkingSpot parkingSpot)
         {
             _weeklyParkingSpots.Add(parkingSpot);
+            return Task.CompletedTask;
         }
 
-        public void Delete(WeeklyParkingSpot parkingSpot)
-        => _weeklyParkingSpots.Remove(parkingSpot);
-
-        public void Update(WeeklyParkingSpot parkingSpot)
+        public Task DeleteAsync(WeeklyParkingSpot parkingSpot)
+        { 
+            _weeklyParkingSpots.Remove(parkingSpot);
+            return Task.CompletedTask;
+        }
+        public Task UpdateAsync(WeeklyParkingSpot parkingSpot)
         {
+            return Task.CompletedTask;
         }
     }
 }

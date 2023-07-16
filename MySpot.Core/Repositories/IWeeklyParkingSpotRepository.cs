@@ -5,11 +5,11 @@ namespace MySpot.Core.Repositories
 {
     public interface IWeeklyParkingSpotRepository
     {
-        IEnumerable<WeeklyParkingSpot> GetAll();
-        WeeklyParkingSpot Get(ParkingSpotId id);
-        void Add(WeeklyParkingSpot parkingSpot);
-        void Update(WeeklyParkingSpot parkingSpot);
-        void Delete(WeeklyParkingSpot parkingSpot);
+        Task<IEnumerable<WeeklyParkingSpot>> GetAllAsync();
+        Task<WeeklyParkingSpot> GetAsync(ParkingSpotId id);
+        Task AddAsync(WeeklyParkingSpot parkingSpot);
+        Task UpdateAsync(WeeklyParkingSpot parkingSpot);
+        Task DeleteAsync(WeeklyParkingSpot parkingSpot);
 
 
     }
