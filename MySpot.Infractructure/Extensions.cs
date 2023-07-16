@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MySpot.Core.Repositories;
 using MySpot.Infractructure.DAL;
@@ -12,10 +13,11 @@ namespace MySpot.Infractructure
 {
     public static class Extensions
     {
-        public static IServiceCollection AddInfrastructure(this IServiceCollection services)
+        public static IServiceCollection AddInfrastructure(this IServiceCollection services, IConfiguration configuration)
         {
+            
             services
-                .AddPostgres();
+                .AddPostgres(configuration);
             return services;
         }
     }

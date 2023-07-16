@@ -8,7 +8,7 @@ using MySpot.Core.Enitites;
 
 namespace MySpot.Infractructure.DAL
 {
-    public sealed class MySpotDbContext : DbContext
+    internal sealed class MySpotDbContext : DbContext
     {
         public DbSet<WeeklyParkingSpot> WeeklyParkingSpots { get; set; }
         public DbSet<Reservation> Reservations { get; set; }
