@@ -1,10 +1,10 @@
 @url = https://localhost:7007
-@reservationId= 55f39e93-a7e2-4a2f-9be4-8d9f35d7ee46
+@reservationId= 3fa85f64-5717-4562-b3fc-2c963f66afa6
 
 @parkingSpotId = 00000000-0000-0000-0000-000000000001
 
 ###
-GET {{url}}/reservations/get
+GET {{url}}/reservations
 ###
 GET {{url}}/reservations/{{reservationId}}
 
@@ -19,7 +19,48 @@ Content-Type: application/json
     "Date": "2023-07-09"
 
 }
+###
+POST {{url}}/reservations
+Content-Type: application/json
 
+{
+  "parkingSpotId": {
+    "value": "00000000-0000-0000-0000-000000000001"
+  },
+  "reservationId": {
+    "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "date": {
+    "value": "2023-07-17T18:44:47.151Z"
+  },
+  "employeeName": {
+    "value": "Name"
+  },
+  "licensePlate": {
+    "value": "LicensePlate"
+  }
+}
+###
+POST {{url}}/reservations
+Content-Type: application/json
+
+{
+  "parkingSpotId": {
+    "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "reservationId": {
+    "value": "3fa85f64-5717-4562-b3fc-2c963f66afa6"
+  },
+  "date": {
+    "value": "2023-07-17T19:08:54.813Z"
+  },
+  "employeeName": {
+    "value": "string"
+  },
+  "licensePlate": {
+    "value": "string"
+  }
+}
 ###
 PUT {{url}}/reservations/{{reservationId}}
 Content-Type: application/json
