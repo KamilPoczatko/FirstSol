@@ -20,7 +20,8 @@ namespace MySpot.Api.Tests.Entities
         public WeeklyParkingSpotTests()
         {
 
-            _now = new Date(new DateTime(2022, 08, 10));
+            //_now = new Date(new DateTime(2022, 08, 10));
+            _now = new Date(DateTime.SpecifyKind(new DateTime(2022, 08, 10), DateTimeKind.Utc));
             _weeklyParkingSpot = new WeeklyParkingSpot(Guid.NewGuid(), new Week(_now), "P1");
         }
         #endregion
@@ -39,7 +40,7 @@ namespace MySpot.Api.Tests.Entities
             var reservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id,"Romana Zupa", "RMI XYZ", new Date(invalidDate));
 
             // ACT
-            var exception = Record.Exception(()=> _weeklyParkingSpot.AddReservation(reservation, _now));
+            var exception = Record.Exception(()=> _weeklyParkingSpot.AddReservation(reservation, _now.Value.Date));
             // Assert
 
             exception.ShouldNotBeNull();
@@ -52,14 +53,15 @@ namespace MySpot.Api.Tests.Entities
         [Fact]
         public void given_reservation_for_already_existing_date_add_reservation_should_fall()
         {
+            //DateTime.SpecifyKind( DateTimeKind.Utc)
             //Arrange
             var reservationDate = _now.AddDay(1);
             var reservation     = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, "Romana Zupa", "RMI XYZ", reservationDate);
             var nextReservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, "Romana Zupa", "RMI XYZ", reservationDate);
-            _weeklyParkingSpot.AddReservation(reservation, reservationDate);
+            _weeklyParkingSpot.AddReservation(reservation, reservationDate.Value.Date);
 
             //ACT
-            var exception = Record.Exception(() => _weeklyParkingSpot.AddReservation(nextReservation, reservationDate));
+            var exception =  Record.Exception(() => _weeklyParkingSpot.AddReservation(nextReservation, reservationDate.Value.Date));
 
             //Assert
             exception.ShouldNotBeNull();
@@ -75,7 +77,7 @@ namespace MySpot.Api.Tests.Entities
             var rservation = new Reservation(Guid.NewGuid(), _weeklyParkingSpot.Id, "Romana Zupa", "RMI XYZ", reservationDate);
 
             //ACT
-            _weeklyParkingSpot.AddReservation(rservation, _now);
+            _weeklyParkingSpot.AddReservation(rservation, _now.Value.Date);
 
             //Assert
             _weeklyParkingSpot.Reservations.ShouldHaveSingleItem();

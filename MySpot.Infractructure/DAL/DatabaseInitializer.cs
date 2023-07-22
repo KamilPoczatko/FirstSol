@@ -26,7 +26,7 @@ namespace MySpot.Infractructure.DAL
         {
             using (var scoper = _serviceProvider.CreateScope())
             {
-                var dbContext = _serviceProvider.GetRequiredService<MySpotDbContext>();
+                var dbContext = scoper.ServiceProvider.GetRequiredService<MySpotDbContext>();
                 dbContext.Database.Migrate();
 
                 var weeklyParkingSpots = dbContext.WeeklyParkingSpots.ToList();

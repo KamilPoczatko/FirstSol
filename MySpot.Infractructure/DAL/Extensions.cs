@@ -27,7 +27,8 @@ namespace MySpot.Infractructure.DAL
 
             services.AddDbContext<MySpotDbContext>(x => x.UseNpgsql(options.ConnectionString));
             services.AddScoped<IWeeklyParkingSpotRepository, PostgresWeeklyParkingSpotRepository>();
-            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior",true);
+            //services.AddSingleton<IWeeklyParkingSpotRepository, PostgresWeeklyParkingSpotRepository>();
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
             services.AddHostedService<DatabaseInitializer>();
             return services;
         }

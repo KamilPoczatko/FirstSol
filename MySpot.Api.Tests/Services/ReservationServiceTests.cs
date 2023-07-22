@@ -37,7 +37,7 @@ namespace MySpot.Api.Tests.Services
             //Arrange
             var parkingSpots = await _weeklyParkingSpotRepository.GetAllAsync();
             var parkingSpot = parkingSpots.First(); 
-            var command = new CreateReservation(parkingSpot.Id, Guid.NewGuid(), _clock.Current(), "John Doe", "RMI 123");
+            var command = new CreateReservation(parkingSpot.Id, Guid.NewGuid(), new Date(_clock.Current()), "John Doe", "RMI 123");
 
             //ACT
 

@@ -1,4 +1,5 @@
 ﻿using MySpot.Core.Exceptions;
+using System;
 
 namespace MySpot.Core.ValueObjects
 {
@@ -14,6 +15,19 @@ namespace MySpot.Core.ValueObjects
             }
             Value = value;
         }
+
+        //public ParkingSpotId(string value)
+        //{
+        //    if (string.IsNullOrEmpty(value))
+        //    {
+        //        throw new InvalidEnitityIdException();
+        //    }
+        //    Value = ;
+        //    if(Value is null)
+        //    {
+        //        throw new InvalidEnitityIdException();
+        //    }
+        //}
 
         public static implicit operator Guid?(ParkingSpotId value) => value.Value;
 
